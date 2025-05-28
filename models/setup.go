@@ -1,15 +1,18 @@
 package models
 import (
-"gorm.io/driver/mysql"
+"gorm.io/driver/postgres"
 "gorm.io/gorm"
+"os"
+"log"
 )
 
 var DB *gorm.DB
 
 func ConnectDatabase() {
-database, err := gorm.Open(mysql.Open("AthThobari:iniaththobari@tcp(127.0.0.1:3306)/go_santrikoding"),&gorm.Config{})
+dsn := os.Getenv("POSTGRES_URL") // Ambil dari environtment
+database, err := gorm.Open(postgres.Open(dsn),&gorm.Config{})
 if err !=nil {
-panic("failed to connect database")
+log.Fatal("failed to connect to database: ", err)
 }
 
 database.AutoMigrate(&Post{})
