@@ -1,0 +1,24 @@
+### Create Post ###
+echo '{
+  "title": "Judul Postingan test",
+  "content": "Isi konten postingan tes"
+}' | curl -s -X POST http://localhost:3000/api/posts \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  --data @- | jq
+
+
+### Get All Post ###
+curl -s http://localhost:3000/api/posts | jq
+
+## Get Post By Id
+curl -s http://localhost:3000/api/posts/1 | jq
+
+### Update Post By Id ###
+echo '{
+  "title": "Ibnu Jarir Ath Thobari",
+  "content": "Backend Programer"
+}' | curl -s -X PUT http://localhost:3000/api/posts/1 \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  --data @- | jq
