@@ -33,6 +33,6 @@ router.GET("api/posts/:id", controllers.FindPostById)
 //membuat route update post
 router.PUT("api/posts/:id", controllers.UpdatePost)
 
-//mulai server dengan route 3000
-router.Run(":3000")
+//mulai server dengan route 8000
+router.Run(":8000")
 }
