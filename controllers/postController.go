@@ -5,6 +5,7 @@ import (
 "net/http"
 "backend-api/models"
 
+"gorm.io/gorm"
 "github.com/go-playground/validator/v10"
 "github.com/gin-gonic/gin"
 )
@@ -136,3 +137,36 @@ c.JSON(200, gin.H{
 "data":post,
 })
 }
+
+// Delete Post
+func DeletePost(c *gin.Context) {
+
+var post models.Post
+
+if err := models.DB.Session(&gorm.Session{
+PrepareStmt: false,
+}).Where("id = ?", c.Param("id")).First(&post).
+Error; err != nil {
+c.JSON(http.StatusBadRequest, gin.H{
+"error" : "Record not found!",
+})
+return
+}
+
+//delete post
+if err := models.DB.Session(&gorm.Session{
+PrepareStmt: false,
+}).Delete(&post).Error; err !=
+nil {
+c.JSON(500, gin.H{
+"error": "Failed to delete post",
+})
+return
+}
+
+c.JSON(200, gin.H{
+"success" : true,
+"message" : "Post Deleted Successfully",
+})
+}
+

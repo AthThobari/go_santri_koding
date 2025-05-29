@@ -1,3 +1,5 @@
+https://sleepy-fionnula-aththobari-e191e819.koyeb.app/
+
 ### Create Post ###
 echo '{
   "title": "Judul Postingan test",
@@ -22,3 +24,17 @@ echo '{
   -H "Accept: application/json" \
   -H "Content-Type: application/json" \
   --data @- | jq
+
+echo '{
+  "title": "Ibnu Jarir Ath Thobari",
+  "content": "Backend Programer"
+}' | curl -s -X PUT \ 
+https://sleepy-fionnula-aththobari-e191e819.koyeb.app/api/posts/1 \
+  -H "Accept: application/json" \
+  -H "Content-Type: application/json" \
+  --data @- | jq
+
+
+### Delete Post By Id ###
+
+curl -s -X DELETE http://localhost:8000/api/posts/1 | jq

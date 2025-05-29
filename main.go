@@ -33,6 +33,9 @@ router.GET("api/posts/:id", controllers.FindPostById)
 //membuat route update post
 router.PUT("api/posts/:id", controllers.UpdatePost)
 
+//membuat route delete post
+router.DELETE("api/posts/:id", controllers.DeletePost)
+
 //mulai server dengan route 8000
 router.Run(":8000")
 }
