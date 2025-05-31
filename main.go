@@ -2,13 +2,30 @@ package main
 import (
 "backend-api/controllers"
 "backend-api/models"
-
+"time"
+"github.com/gin-contrib/cors"
 "github.com/gin-gonic/gin"
 )
 
 func main(){
 //inisialisasi gin
 router := gin.Default()
+
+router.Use(cors.New(cors.Config{
+AllowOrigins:
+[]string{"*"},
+
+AllowMethods:
+[]string{"GET","POST","PUT","DELETE","OPTIONS"},
+
+AllowHeaders:
+[]string{"Origin","Content-Type","Accept"},
+
+ExposeHeaders:
+[]string{"Content-Length"},
+	AllowCredentials: true,
+	MaxAge: 12 * time.Hour,
+}))
 
 //panggil koneksi database
 models.ConnectDatabase()
